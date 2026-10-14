@@ -142,7 +142,7 @@
 }
 .custom .face {
     position: absolute;
-    background: url("https://gamepadviewer.com/xbox-assets/dpad.svgz") no-repeat;
+    background: url(xbox-assets/dpad.svg) no-repeat;
     opacity: 0;
 }
 .custom .face.pressed { opacity: 1; }
