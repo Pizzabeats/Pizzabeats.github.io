@@ -1,3 +1,4 @@
+
 /* Pizzabeats Thrustmaster skin for GPV custom CSS.
    Original 750 x 630 canvas and original inner geometry.
    Only your four i.imgur.com PNGs and the original GPV Xbox assets.
@@ -17,7 +18,9 @@
 /* Unlike the original stylesheet, don't hide controls in editor preview. */
 .custom .quadrant { display: none; }
 
-/* TRIGGERS — original 446 x 121 region, 88 x 121 trigger art. */
+/* TRIGGERS — original 446 x 121 region, 88 x 121 trigger art.
+   GPV 2 may render two sets. Keep the original .trigger sprites only;
+   suppress the extra .trigger-button duplicates. */
 .custom .triggers {
     position: absolute;
     left: 152px;
@@ -25,19 +28,17 @@
     width: 446px;
     height: 121px;
 }
-.custom .trigger,
-.custom .trigger-button {
+.custom .trigger {
     width: 88px;
     height: 121px;
     background: url("https://gamepadviewer.com/xbox-assets/trigger.svg") no-repeat;
     opacity: 0;
 }
-.custom .trigger.left,
-.custom .trigger-button.left { float: left; background-position: 0 0; }
-.custom .trigger.right,
-.custom .trigger-button.right { float: right; transform: rotateY(180deg); }
-.custom .trigger.pressed,
-.custom .trigger-button.pressed { opacity: 1; }
+.custom .trigger.left { float: left; background-position: 0 0; }
+.custom .trigger.right { float: right; transform: rotateY(180deg); }
+.custom .trigger.pressed { opacity: 1; }
+/* Hide duplicate trigger-button overlay, NOT original Xbox triggers. */
+.custom .trigger-button { display: none !important; }
 
 /* BUMPERS — original container and your Imgur art. */
 .custom .bumpers {
@@ -57,7 +58,8 @@
 .custom .bumper.right { float: right; transform: rotateY(180deg); }
 .custom .bumper.pressed { opacity: 1; }
 
-/* BACK / START — original region, original pressed offsets. */
+/* BACK / START — same absolute original positions; only opacity changes on press.
+   This prevents the Settings/Menu overlay from jumping on press. */
 .custom .arrows {
     position: absolute;
     left: 306px;
@@ -73,12 +75,13 @@
     background: url("https://i.imgur.com/HhliUTU.png") no-repeat;
     opacity: 0;
 }
-.custom .back { float: left; background-position: 0 0; }
-.custom .start { float: right; background-position: -33px 0; }
-.custom .back.pressed { opacity: 1; left: -39px; top: -91px; }
-.custom .start.pressed { opacity: 1; left: 134px; top: -91px; }
+.custom .back { left: -39px; top: -91px; background-position: 0 0; }
+.custom .start { left: 134px; top: -91px; background-position: -33px 0; }
+.custom .back.pressed,
+.custom .start.pressed { opacity: 1; }
 
-/* ABXY — original 153 x 156 region and 48 x 48 art. */
+/* ABXY — original 153 x 156 region and 48 x 48 art.
+   Keep pressed art on the exact same pixel coordinates as idle art. */
 .custom .abxy {
     position: absolute;
     left: 488px;
@@ -97,11 +100,15 @@
 .custom .x { background-position: -98px 0; left: 4px; top: 64px; }
 /* Y sprite is the fourth 48px tile; +48px would show no tile. */
 .custom .y { background-position: -147px 0; left: 55px; top: 12px; }
-.custom .button.pressed { background-position-y: -48px; opacity: 1; }
-.custom .a.pressed { left: 55px; top: 108px; }
-.custom .b.pressed { right: 0; top: 58px; }
-.custom .x.pressed { left: 4px; top: 58px; }
-.custom .y.pressed { left: 54px; top: 7px; }
+.custom .button.pressed {
+    background-position-y: -48px;
+    opacity: 1;
+    margin-top: 0 !important;
+}
+.custom .a.pressed { left: 55px; top: 114px; }
+.custom .b.pressed { right: -1px; top: 64px; }
+.custom .x.pressed { left: 4px; top: 64px; }
+.custom .y.pressed { left: 55px; top: 12px; }
 
 /* STICKS — original Xbox stick.svg, original 371 x 196 region. */
 .custom .sticks {
@@ -123,7 +130,9 @@
 .custom .stick.right { left: 274px; top: 107px; }
 
 /* D-PAD — your EXPLICIT requested original Gamepad Viewer dpad.svg URL.
-   Preserve every original directional sprite offset and position. */
+   All original directional coordinates remain. The old positive 34px
+   offset made the UP sprite disappear; use the same original down sprite
+   rotated 180 degrees for UP instead. No substitute artwork. */
 .custom .dpad {
     position: absolute;
     left: 129px;
@@ -142,7 +151,9 @@
     top: 0;
     width: 34px;
     height: 56px;
-    background-position: 34px 0;
+    background-position: 0 0;
+    transform: rotate(180deg);
+    transform-origin: center;
 }
 .custom .face.down {
     left: 38px;
