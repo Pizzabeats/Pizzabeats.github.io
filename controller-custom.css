@@ -1,15 +1,15 @@
-/* BEGIN Thrustmaster / Xbox One custom skin, v4
+/* BEGIN Thrustmaster / Xbox One custom skin, v5
    GPV 2.0: set this file as CUSTOM CSS URL (not Edit CSS URL).
    Keep your original 750 x 630 canvas and original nested container coordinates.
-   Separate controls are self-rendered in CSS, apart from your own Imgur artwork.
+   Keep working self-rendered thumbsticks. Match D-pad press to base art.
 */
 .controller.custom {
-    position: relative;
-    background: url("https://i.imgur.com/yghy9Zb.png") center center / 750px 630px no-repeat;
+    /* Use GPV's own controller placement; don't offset a centered preview. */
+    background: url("https://i.imgur.com/yghy9Zb.png") 0 0 / 750px 630px no-repeat;
     width: 750px;
     height: 630px;
-    margin-left: -375px;
-    margin-top: -315px;
+    margin-left: 0;
+    margin-top: 0;
 }
 
 /* Do NOT use .custom.disconnected div { display:none; } while testing. */
@@ -155,8 +155,11 @@
                 inset 0 1px 9px #777, 0 0 9px rgba(255,207,40,.9);
 }
 
-/* D-pad: precise original container and directional-element geometry.
-   CSS-only pressed overlays, so no external sprite dependency. */
+/* D-pad: preserve YOUR original yellow cross artwork.
+   Each direction reuses the matching 750x630 patch of the actual controller
+   background. "screen" makes yellow pixels light up without drawing new
+   polygon/arrows over your design; nearly-black pixels remain dark.
+   Positions and sizes copied directly from your first CSS. */
 .custom .dpad {
     position: absolute;
     width: 110px;
@@ -166,30 +169,41 @@
 }
 .custom .face {
     position: absolute;
-    background: linear-gradient(#fff3a0, #ffc400);
+    background-image: url("https://i.imgur.com/yghy9Zb.png");
+    background-size: 750px 630px;
+    background-repeat: no-repeat;
+    mix-blend-mode: screen;
+    filter: saturate(1.25);
     opacity: 0;
-    filter: drop-shadow(0 0 6px #ffcf25);
 }
-.custom .face.pressed { opacity: .88; }
+.custom .face.pressed { opacity: 1; }
 .custom .face.up {
-    left: 38px; top: 0;
-    width: 34px; height: 56px;
-    clip-path: polygon(50% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+    left: 38px;
+    top: 0;
+    width: 34px;
+    height: 56px;
+    background-position: -167px -226px;
 }
 .custom .face.down {
-    left: 38px; bottom: 0;
-    width: 34px; height: 56px;
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    left: 38px;
+    bottom: 0;
+    width: 34px;
+    height: 56px;
+    background-position: -167px -281px;
 }
 .custom .face.left {
-    left: 0; top: 38px;
-    width: 55px; height: 35px;
-    clip-path: polygon(0 50%, 30% 0, 100% 0, 100% 100%, 30% 100%);
+    left: 0;
+    top: 38px;
+    width: 55px;
+    height: 35px;
+    background-position: -129px -264px;
 }
 .custom .face.right {
-    right: 0; top: 38px;
-    width: 55px; height: 35px;
-    clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%);
+    right: 0;
+    top: 38px;
+    width: 55px;
+    height: 35px;
+    background-position: -184px -264px;
 }
 
 /* END Thrustmaster / Xbox One custom skin */
