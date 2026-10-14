@@ -1,10 +1,9 @@
-/* External edit stylesheet for the Xbox skin in GamePad Viewer.
-   Use as an Edit CSS URL (editcss=), keeping the Xbox skin selected.
-   The original OBS custom CSS used relative xbox-assets URLs,
-   which must be made absolute when loaded from a different site. */
+/* Fixed Edit CSS for GPV classic Xbox base skin.
+   Use with editcss= and select Xbox One as the base skin.
+   Keeps GPV built-in stick/trigger/D-pad graphics and fixes direct Imgur image links. */
 
 .controller.xbox {
-    background: url(https://imgur.com/yghy9Zb.png);
+    background: url(https://i.imgur.com/yghy9Zb.png);
     height: 630px;
     width: 750px;
     /*    margin-left: -375px;
@@ -12,7 +11,6 @@
 }
 
 .xbox.disconnected {
-    background: url(https://gamepadviewer.com/xbox-assets/disconnected.svg);
 }
 
 .xbox.disconnected div {
@@ -29,7 +27,6 @@
 .xbox .trigger {
     width: 88px;
     height: 121px;
-    background: url(https://gamepadviewer.com/xbox-assets/trigger.svg);
     opacity: 0;
 }
 
@@ -46,7 +43,7 @@
 .xbox .bumper {
     width: 170px;
     height: 61px;
-    background: url(https://imgur.com/Jk9R5Uc.png);
+    background: url(https://i.imgur.com/Jk9R5Uc.png);
     opacity: 0;
 }
 
@@ -81,7 +78,7 @@
 }
 
 .xbox .back, .xbox .start {
-    background: url(https://imgur.com/HhliUTU.png);
+    background: url(https://i.imgur.com/HhliUTU.png);
     position: absolute;
     width: 33px;
     height: 33px;
@@ -123,7 +120,7 @@
 
 .xbox .button {
     position: absolute;
-    background: url(https://imgur.com/WaZySrf.png);
+    background: url(https://i.imgur.com/WaZySrf.png);
     width: 48px;
     height: 48px;
 }
@@ -189,7 +186,6 @@
 
 .xbox .stick {
     position: absolute;
-    background: url(https://gamepadviewer.com/xbox-assets/stick.svg);
     background-position: -85px 0;
     height: 83px;
     width: 83px;
@@ -218,7 +214,6 @@
 }
 
 .xbox .face {
-    background: url(https://gamepadviewer.com/xbox-assets/dpad.svg);
     position: absolute;
     opacity: 0;
 }
