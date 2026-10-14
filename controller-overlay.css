@@ -1,262 +1,179 @@
-/* GPV CUSTOM controller skin — adapted from your original Xbox stylesheet.
- * Use the Custom CSS URL field (or ?css=), NOT Edit CSS URL (?editcss=).
- * This uses .controller.custom / .custom selectors as required for a custom skin.
- * OBS still needs a working Gamepad API to animate the controller.
- * Verify each external asset URL loads; built-in Xbox sprites use gamepadviewer.com.
- */
+/* Thrustmaster Xbox-style custom skin — restored controls, GPV custom CSS mode.
+   For "Custom CSS URL" / ?css= (NOT "Edit CSS URL" / ?editcss=).
+   Your original 750 x 630 skin geometry, Imgur images, and button coordinates
+   are preserved. Built-in Xbox sprite fallback paths now use the original
+   site's .svgz assets instead of the unverified .svg paths in the prior file.
+
+   This stylesheet controls appearance only: GPV still requires Gamepad API
+   access for live button and analog-stick animation.
+*/
 
 .controller.custom {
-    background: url("https://i.imgur.com/yghy9Zb.png") center center / 750px 630px no-repeat;
-    height: 630px;
+    position: relative;
     width: 750px;
-    /* Modern GPV uses its own centering; no negative margins needed. */
+    height: 630px;
+    background-image: url("https://i.imgur.com/yghy9Zb.png"),
+                      url("https://gamepadviewer.com/xbox-assets/base.svgz");
+    background-position: center center, center center;
+    background-size: 750px 630px, 750px 630px;
+    background-repeat: no-repeat, no-repeat;
 }
 
-.custom.disconnected {
-    /* Keep the controller body visible, even when OBS detects no gamepad. */
-    background: url("https://i.imgur.com/yghy9Zb.png") center center / 750px 630px no-repeat;
-}
+/* Do NOT hide controls in disconnected mode here. The original custom CSS
+   hid every child div, causing all sticks and buttons to disappear whenever
+   OBS failed to see a gamepad. Displaying controls does not make them animate
+   without a connected gamepad. */
 
-.custom.disconnected div {
-    display: none;
-}
-
+/* Triggers */
 .custom .triggers {
-    width: 446px;
-    height: 121px;
     position: absolute;
     left: 152px;
+    width: 446px;
+    height: 121px;
 }
-
 .custom .trigger {
     width: 88px;
     height: 121px;
-    background: url(https://gamepadviewer.com/xbox-assets/trigger.svg);
+    background-image: url("https://gamepadviewer.com/xbox-assets/trigger.svgz"),
+                      linear-gradient(to bottom, #303944, #778897 60%, #2b3540);
+    background-size: auto, 88px 121px;
+    background-position: 0 0, center;
+    background-repeat: no-repeat, no-repeat;
     opacity: 0;
 }
+.custom .trigger.left { float: left; }
+.custom .trigger.right { float: right; transform: rotateY(180deg); }
 
-.custom .trigger.left {
-    float: left;
-    background-position: 0 0;
+/* Shoulder bumpers */
+.custom .bumpers {
+    position: absolute;
+    left: 107px;
+    top: 129px;
+    width: 536px;
+    height: 61px;
 }
-
-.custom .trigger.right {
-    float: right;
-    transform: rotateY(180deg);
-}
-
 .custom .bumper {
     width: 170px;
     height: 61px;
-    background: url(https://i.imgur.com/Jk9R5Uc.png);
+    background-image: url("https://i.imgur.com/Jk9R5Uc.png"),
+                      url("https://gamepadviewer.com/xbox-assets/bumper.svgz"),
+                      linear-gradient(to bottom, #71818f, #232d38);
+    background-repeat: no-repeat;
+    background-position: left top;
     opacity: 0;
 }
+.custom .bumper.pressed { opacity: 1; }
+.custom .bumper.left { float: left; }
+.custom .bumper.right { float: right; transform: rotateY(180deg); }
 
-.custom .bumpers {
-    position: absolute;
-    width: 536px;
-    height: 61px;
-    left: 107px;
-    top: 129px;
-}
-
-.custom .bumper.pressed {
-    opacity: 1;
-}
-
-.custom .bumper.left {
-    float: left;
-}
-
-.custom .bumper.right {
-    float: right;
-    -webkit-transform: rotateY(180deg);
-    transform: rotateY(180deg);
-}
-
+/* Back / Start buttons */
 .custom .arrows {
     position: absolute;
-    width: 141px;
-    height: 33px;
     top: 264px;
     left: 306px;
+    width: 141px;
+    height: 33px;
 }
-
 .custom .back, .custom .start {
-    background: url(https://i.imgur.com/HhliUTU.png);
     position: absolute;
     width: 33px;
     height: 33px;
+    background-image: url("https://i.imgur.com/HhliUTU.png"),
+                      url("https://gamepadviewer.com/xbox-assets/start-select.svgz"),
+                      radial-gradient(circle, #dce9f5 0 55%, #252d35 60%);
+    background-repeat: no-repeat;
     opacity: 0;
 }
+.custom .back { float: left; }
+.custom .start { float: right; background-position: 33px 0, 33px 0, center; }
+.custom .back.pressed { opacity: 1; top: -91px; left: -39px; }
+.custom .start.pressed { opacity: 1; top: -91px; left: 134px; }
+.custom .quadrant { display: none; }
 
-.custom .back.pressed {
-    opacity: 1;
-    top: -91px;
-    left: -39px;
-}
-
-.custom .start.pressed {
-    opacity: 1;
-    top: -91px;
-    left: 134px;
-}
-
-.custom .back {
-    float: left;
-}
-
-.custom .start {
-    background-position: 33px 0px;
-    float: right;
-}
-
-.custom .quadrant {
-    display: none;
-}
-
+/* ABXY button sprite — always has a fallback if the Imgur sprite disappears. */
 .custom .abxy {
     position: absolute;
-    width: 153px;
-    height: 156px;
     top: 192px;
     left: 488px;
+    width: 153px;
+    height: 156px;
 }
-
 .custom .button {
+    --x: 0px;
+    --y: 0px;
     position: absolute;
-    background: url(https://i.imgur.com/WaZySrf.png);
     width: 48px;
     height: 48px;
-}
-
-.custom .a.pressed {
-    background-position-y: -48px;
+    background-image: url("https://i.imgur.com/WaZySrf.png"),
+                      url("https://gamepadviewer.com/xbox-assets/abxy.svgz"),
+                      radial-gradient(circle, #506173 0 55%, #111923 57% 73%, transparent 75%);
+    background-position: var(--x) var(--y), var(--x) var(--y), center;
+    background-size: auto, auto, 48px 48px;
+    background-repeat: no-repeat;
     opacity: 1;
-    top: 108px;
-    left: 55px;
 }
+.custom .button.pressed {
+    --y: -48px;
+    filter: brightness(1.45);
+}
+.custom .a { --x: 0px; top: 114px; left: 55px; }
+.custom .b { --x: -49px; top: 64px; right: -1px; }
+.custom .x { --x: -98px; top: 64px; left: 4px; }
+.custom .y { --x: 48px; top: 12px; left: 55px; }
+.custom .a.pressed { top: 108px; }
+.custom .b.pressed { top: 58px; right: 0px; }
+.custom .x.pressed { top: 58px; }
+.custom .y.pressed { top: 7px; left: 54px; }
 
-.custom .b.pressed {
-    background-position-y: -48px;
-    opacity: 1;
-    top: 58px;
-    right: 0px;
-}
-
-.custom .x.pressed {
-    background-position-y: -48px;
-    opacity: 1;
-    top: 58px;
-    left: 4px;
-}
-
-.custom .y.pressed {
-    background-position-y: -48px;
-    opacity: 1;
-    top: 7px;
-    left: 54px;
-}
-.custom .a {
-    background-position: 0 0;
-    top: 114px;
-    left: 55px;
-}
-
-.custom .b {
-    background-position: -49px 0;
-    top: 64px;
-    right: -1px;
-}
-
-.custom .x {
-    background-position: -98px 0;
-    top: 64px;
-    left: 4px;
-}
-
-.custom .y {
-    background-position: 48px 0;
-    left: 55px;
-    top: 12px;
-}
-
+/* Analog sticks; these elements move when GPV reads analog-axis input. */
 .custom .sticks {
     position: absolute;
-    width: 371px;
-    height: 196px;
     top: 239px;
     left: 144px;
+    width: 371px;
+    height: 196px;
 }
-
 .custom .stick {
     position: absolute;
-    background: url(https://gamepadviewer.com/xbox-assets/stick.svg);
-    background-position: -85px 0;
     height: 83px;
     width: 83px;
+    background-image: url("https://gamepadviewer.com/xbox-assets/stick.svgz"),
+                      radial-gradient(circle at 48% 42%, #707e8e 0%, #374552 48%, #0c1623 69%, transparent 72%);
+    background-repeat: no-repeat;
+    background-position: -85px 0, center;
+    background-size: auto, 83px 83px;
 }
+.custom .stick.pressed { background-position: 0 0, center; filter: brightness(1.3); }
+.custom .stick.left { top: 107px; left: 101px; }
+.custom .stick.right { top: 107px; left: 274px; }
 
-.custom .stick.pressed {
-    background-position: 0 0;
-}
-
-.custom .stick.left {
-    top: 107px;
-    left: 101px;
-}
-
-.custom .stick.right {
-    top: 107px;
-    left: 274px;
-}
-
+/* D-pad press highlights */
 .custom .dpad {
     position: absolute;
-    width: 110px;
-    height: 111px;
     top: 226px;
     left: 129px;
+    width: 110px;
+    height: 111px;
 }
-
 .custom .face {
-    background: url(https://gamepadviewer.com/xbox-assets/dpad.svg);
     position: absolute;
+    background-image: url("https://gamepadviewer.com/xbox-assets/dpad.svgz"),
+                      linear-gradient(135deg, rgba(210,231,251,.9), rgba(89,119,160,.9));
+    background-repeat: no-repeat;
+    background-position: 0 0, center;
     opacity: 0;
 }
-
-.custom .face.pressed {
-    opacity: 1;
-}
-
+.custom .face.pressed { opacity: 1; }
 .custom .face.up {
-    background-position: 34px 0;
-    left: 38px;
-    top: 0px;
-    width: 34px;
-    height: 56px;
+    background-position: 34px 0, center;
+    left: 38px; top: 0; width: 34px; height: 56px;
 }
-
-.custom .face.down {
-    left: 38px;
-    bottom: 0;
-    width: 34px;
-    height: 56px;
-}
-
+.custom .face.down { left: 38px; bottom: 0; width: 34px; height: 56px; }
 .custom .face.left {
-    background-position: 0 -93px;
-    width: 55px;
-    height: 35px;
-    top: 38px;
-    left: 0;
+    background-position: 0 -93px, center;
+    left: 0; top: 38px; width: 55px; height: 35px;
 }
-
 .custom .face.right {
-    background-position: 0 -57px;
-    width: 55px;
-    height: 35px;
-    top: 38px;
-    right: 0;
+    background-position: 0 -57px, center;
+    right: 0; top: 38px; width: 55px; height: 35px;
 }
-
