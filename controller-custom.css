@@ -1,195 +1,166 @@
-/* BEGIN Thrustmaster / Xbox One custom skin, v4
-   GPV 2.0: set this file as CUSTOM CSS URL (not Edit CSS URL).
-   Keep your original 750 x 630 canvas and original nested container coordinates.
-   Separate controls are self-rendered in CSS, apart from your own Imgur artwork.
+/* Pizzabeats Thrustmaster skin for GPV custom CSS.
+   Original 750 x 630 canvas and original inner geometry.
+   Only your four i.imgur.com PNGs and the original GPV Xbox assets.
+   Crucially: let GPV position/center .controller. No 50%/translate overrides.
 */
+
 .controller.custom {
-    position: relative;
-    background: url("https://i.imgur.com/yghy9Zb.png") center center / 750px 630px no-repeat;
     width: 750px;
     height: 630px;
-    margin-left: -375px;
-    margin-top: -315px;
+    margin: 0 !important;
+    background-image: url("https://i.imgur.com/yghy9Zb.png");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 750px 630px;
 }
 
-/* Do NOT use .custom.disconnected div { display:none; } while testing. */
+/* Unlike the original stylesheet, don't hide controls in editor preview. */
 .custom .quadrant { display: none; }
 
-/* Triggers: the old stylesheet targeted .trigger; newer GPV skins may
-   instead call the element .trigger-button. Support both. */
+/* TRIGGERS — original 446 x 121 region, 88 x 121 trigger art. */
 .custom .triggers {
     position: absolute;
-    width: 446px;
-    height: 121px;
     left: 152px;
     top: 0;
+    width: 446px;
+    height: 121px;
 }
 .custom .trigger,
 .custom .trigger-button {
-    position: absolute;
     width: 88px;
     height: 121px;
-    background: linear-gradient(180deg, rgba(255,207,70,.9), rgba(242,143,0,.8));
-    clip-path: polygon(15% 0, 85% 0, 100% 26%, 100% 78%, 70% 100%, 30% 100%, 0 78%, 0 26%);
+    background: url("https://gamepadviewer.com/xbox-assets/trigger.svg") no-repeat;
     opacity: 0;
 }
-.custom .triggers .trigger.left,
-.custom .triggers .trigger-button.left { left: 0; top: 0; }
-.custom .triggers .trigger.right,
-.custom .triggers .trigger-button.right { right: 0; top: 0; }
-/* Accommodate GPV templates with trigger elements directly under .controller. */
-.custom > .trigger.left,
-.custom > .trigger-button.left { left: 152px; top: 0; }
-.custom > .trigger.right,
-.custom > .trigger-button.right { left: 510px; top: 0; }
+.custom .trigger.left,
+.custom .trigger-button.left { float: left; background-position: 0 0; }
+.custom .trigger.right,
+.custom .trigger-button.right { float: right; transform: rotateY(180deg); }
 .custom .trigger.pressed,
-.custom .trigger-button.pressed {
-    opacity: 1;
-    filter: drop-shadow(0 0 7px rgba(255,205,40,.9));
-}
+.custom .trigger-button.pressed { opacity: 1; }
 
-/* Bumpers: your own original Imgur sprite, original 536x61 container. */
+/* BUMPERS — original container and your Imgur art. */
 .custom .bumpers {
     position: absolute;
-    width: 536px;
-    height: 61px;
     left: 107px;
     top: 129px;
+    width: 536px;
+    height: 61px;
 }
 .custom .bumper {
-    position: absolute;
-    background: url("https://i.imgur.com/Jk9R5Uc.png") 0 0 / auto no-repeat;
     width: 170px;
     height: 61px;
+    background: url("https://i.imgur.com/Jk9R5Uc.png") no-repeat;
     opacity: 0;
 }
-.custom .bumper.left { left: 0; top: 0; }
-.custom .bumper.right { right: 0; top: 0; transform: rotateY(180deg); }
-.custom .bumper.pressed {
-    opacity: 1;
-    filter: drop-shadow(0 0 6px rgba(255,207,50,.9));
-}
+.custom .bumper.left { float: left; }
+.custom .bumper.right { float: right; transform: rotateY(180deg); }
+.custom .bumper.pressed { opacity: 1; }
 
-/* Back / Start. Original arrows container and pressed coordinates. */
+/* BACK / START — original region, original pressed offsets. */
 .custom .arrows {
     position: absolute;
+    left: 306px;
+    top: 264px;
     width: 141px;
     height: 33px;
-    top: 264px;
-    left: 306px;
 }
 .custom .back,
 .custom .start {
     position: absolute;
-    background: url("https://i.imgur.com/HhliUTU.png") no-repeat;
     width: 33px;
     height: 33px;
-    top: -91px;
+    background: url("https://i.imgur.com/HhliUTU.png") no-repeat;
     opacity: 0;
 }
-.custom .back { left: -39px; background-position: 0 0; }
-.custom .start { left: 134px; background-position: -33px 0; }
-.custom .back.pressed,
-.custom .start.pressed {
-    opacity: 1;
-    filter: drop-shadow(0 0 5px white);
-}
+.custom .back { float: left; background-position: 0 0; }
+.custom .start { float: right; background-position: -33px 0; }
+.custom .back.pressed { opacity: 1; left: -39px; top: -91px; }
+.custom .start.pressed { opacity: 1; left: 134px; top: -91px; }
 
-/* ABXY: exact original 153x156 container and 48px individual sprites.
-   Crucially, do NOT scale the sprite sheet to a guessed 192px width.
-   Do NOT change physical position on press: switch only the sprite row.
-*/
+/* ABXY — original 153 x 156 region and 48 x 48 art. */
 .custom .abxy {
     position: absolute;
-    width: 153px;
-    height: 156px;
     left: 488px;
     top: 192px;
+    width: 153px;
+    height: 156px;
 }
 .custom .button {
     position: absolute;
     width: 48px;
     height: 48px;
-    background-image: url("https://i.imgur.com/WaZySrf.png");
-    background-size: auto;
-    background-repeat: no-repeat;
+    background: url("https://i.imgur.com/WaZySrf.png") no-repeat;
 }
-.custom .a { left: 55px; top: 114px; background-position: 0 0; }
-.custom .b { right: -1px; top: 64px; background-position: -49px 0; }
-.custom .x { left: 4px; top: 64px; background-position: -98px 0; }
-.custom .y { left: 55px; top: 12px; background-position: 48px 0; }
-.custom .button.pressed {
-    background-position-y: -48px;
-    filter: brightness(1.15) drop-shadow(0 0 7px rgba(255,255,255,.95));
-    opacity: 1;
-}
+.custom .a { background-position: 0 0; left: 55px; top: 114px; }
+.custom .b { background-position: -49px 0; right: -1px; top: 64px; }
+.custom .x { background-position: -98px 0; left: 4px; top: 64px; }
+/* Y sprite is the fourth 48px tile; +48px would show no tile. */
+.custom .y { background-position: -147px 0; left: 55px; top: 12px; }
+.custom .button.pressed { background-position-y: -48px; opacity: 1; }
+.custom .a.pressed { left: 55px; top: 108px; }
+.custom .b.pressed { right: 0; top: 58px; }
+.custom .x.pressed { left: 4px; top: 58px; }
+.custom .y.pressed { left: 54px; top: 7px; }
 
-/* Sticks: original 371x196 container, 83x83 caps, exact original positions.
-   CSS-rendered to avoid missing/blocked third-party svgz sprite files. */
+/* STICKS — original Xbox stick.svg, original 371 x 196 region. */
 .custom .sticks {
     position: absolute;
-    width: 371px;
-    height: 196px;
     left: 144px;
     top: 239px;
+    width: 371px;
+    height: 196px;
 }
 .custom .stick {
     position: absolute;
-    display: block;
-    box-sizing: border-box;
     width: 83px;
     height: 83px;
-    border-radius: 50%;
-    border: 5px solid #0a0a0c;
-    background:
-      radial-gradient(circle at 37% 31%, rgba(120,120,123,.45), transparent 43%),
-      radial-gradient(circle at 50% 50%, #535456 0%, #444548 48%, #262729 67%, #111113 100%);
-    box-shadow: inset 0 0 0 4px #202124, inset 0 0 0 7px #3a3b3d,
-                inset 0 1px 9px #777, 0 2px 5px #070708;
+    background: url("https://gamepadviewer.com/xbox-assets/stick.svg") no-repeat;
+    background-position: -85px 0;
 }
+.custom .stick.pressed { background-position: 0 0; }
 .custom .stick.left { left: 101px; top: 107px; }
 .custom .stick.right { left: 274px; top: 107px; }
-.custom .stick.pressed {
-    filter: brightness(1.18);
-    box-shadow: inset 0 0 0 4px #202124, inset 0 0 0 7px #3a3b3d,
-                inset 0 1px 9px #777, 0 0 9px rgba(255,207,40,.9);
-}
 
-/* D-pad: precise original container and directional-element geometry.
-   CSS-only pressed overlays, so no external sprite dependency. */
+/* D-PAD — your EXPLICIT requested original Gamepad Viewer dpad.svg URL.
+   Preserve every original directional sprite offset and position. */
 .custom .dpad {
     position: absolute;
-    width: 110px;
-    height: 111px;
     left: 129px;
     top: 226px;
+    width: 110px;
+    height: 111px;
 }
 .custom .face {
     position: absolute;
-    background: linear-gradient(#fff3a0, #ffc400);
+    background: url("https://gamepadviewer.com/xbox-assets/dpad.svg") no-repeat;
     opacity: 0;
-    filter: drop-shadow(0 0 6px #ffcf25);
 }
-.custom .face.pressed { opacity: .88; }
+.custom .face.pressed { opacity: 1; }
 .custom .face.up {
-    left: 38px; top: 0;
-    width: 34px; height: 56px;
-    clip-path: polygon(50% 0, 100% 30%, 100% 100%, 0 100%, 0 30%);
+    left: 38px;
+    top: 0;
+    width: 34px;
+    height: 56px;
+    background-position: 34px 0;
 }
 .custom .face.down {
-    left: 38px; bottom: 0;
-    width: 34px; height: 56px;
-    clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+    left: 38px;
+    bottom: 0;
+    width: 34px;
+    height: 56px;
 }
 .custom .face.left {
-    left: 0; top: 38px;
-    width: 55px; height: 35px;
-    clip-path: polygon(0 50%, 30% 0, 100% 0, 100% 100%, 30% 100%);
+    left: 0;
+    top: 38px;
+    width: 55px;
+    height: 35px;
+    background-position: 0 -93px;
 }
 .custom .face.right {
-    right: 0; top: 38px;
-    width: 55px; height: 35px;
-    clip-path: polygon(0 0, 70% 0, 100% 50%, 70% 100%, 0 100%);
+    right: 0;
+    top: 38px;
+    width: 55px;
+    height: 35px;
+    background-position: 0 -57px;
 }
-
-/* END Thrustmaster / Xbox One custom skin */
