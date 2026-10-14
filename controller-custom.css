@@ -1,8 +1,8 @@
 
 /* =====================================================
-   PIZZABEATS THRUSTMASTER CONTROLLER — V10
+   PIZZABEATS THRUSTMASTER CONTROLLER — V11
    Original controller: 750 x 630 px
-   Only original Xbox assets and your Imgur images
+   Original Xbox assets and your Imgur images
    ===================================================== */
 
 .controller.custom {
@@ -15,12 +15,12 @@
     background-position: 0 0;
     background-size: 750px 630px;
 
-    /* Final alignment adjustments */
-    --menu-press-x: -2px;
-    --menu-press-y: -2px;
+    /* V11 final alignment adjustments */
+    --menu-press-x: -1px;
+    --menu-press-y: 0px;
 
-    --dpad-press-x: -2px;
-    --dpad-press-y: -2px;
+    --dpad-press-x: 2px;
+    --dpad-press-y: 0px;
 }
 
 .custom .quadrant {
@@ -128,7 +128,7 @@
     opacity: 1;
 }
 
-/* Move only the pressed Start/Menu graphic */
+/* V11: Start/Menu pressed alignment */
 .custom .start.pressed {
     translate: var(--menu-press-x) var(--menu-press-y);
 }
@@ -214,7 +214,6 @@
     position: absolute;
     width: 83px;
     height: 83px;
-
     background: url("https://gamepadviewer.com/xbox-assets/stick.svg") no-repeat;
     background-position: -85px 0;
 }
@@ -245,17 +244,14 @@
 
 .custom .face {
     position: absolute;
-
-    /* Your explicitly requested original Xbox asset */
     background: url("https://gamepadviewer.com/xbox-assets/dpad.svg") no-repeat;
-
     opacity: 0;
 }
 
 .custom .face.pressed {
     opacity: 1;
 
-    /* Two-pixel alignment correction for all directions */
+    /* V11: 2px RIGHT relative to original v9 */
     translate: var(--dpad-press-x) var(--dpad-press-y);
 }
 
