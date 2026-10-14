@@ -1,191 +1,265 @@
-/*BEGIN Thrustmaster / Xbox One Controller Styling*/
-.controller.custom{
-    position: relative;
+/* GPV 2 Custom CSS: original-pixel-preserving Thrustmaster layout.
+   Source: your original GPV-Controller-Overlay.css.
+   Pixel dimensions and relative positions are unchanged.
+   Only Xbox->custom selectors, direct image URLs, and overall centering changed.
+   GPV 2: use the CUSTOM CSS URL setting with this stylesheet.
+   Note: the classic Xbox svgz sprite URLs are unverified against GPV 2;
+   they may need to be hosted locally if the respective sprites do not load.
+*/
+
+.controller.custom {
     background: url(https://i.imgur.com/yghy9Zb.png);
     background-size: 750px 630px;
     background-repeat: no-repeat;
-    width: 750px;
     height: 630px;
-    margin-left: 0;
-    margin-top: 0;
+    width: 750px;
+    /* Center a 750 × 630 canvas without changing any control coordinates. */
+    margin-left: -375px;
+    margin-top: -315px;
 }
 
-.custom.disconnected {
-}
+/* Keep the controls visible in the GPV editor even when no pad is detected.
+   The original .disconnected hide-all rule is intentionally disabled. */
 
-/* IMPORTANT:
-   Do NOT hide all child divs when disconnected, or you end up with only the base controller visible.
-*/
-/*
-.custom.disconnected div {
-    display: none;
-}
-*/
-
-/* Triggers */
-
-.custom .trigger-button{
+.custom .triggers {
+    width: 446px;
+    height: 121px;
     position: absolute;
-    background: url(https://shmove.github.io/gamepadviewer-procon/images/default/trigger-button.svg);
-    background-size: 176px 72px;
-    background-repeat: no-repeat;
-    width: 88px;
-    height: 36px;
-}
-.custom .trigger-button.pressed{
-    background-position-y: -36px;
-}
-
-.custom .trigger-button.left{
-    background-position-x: 0px;
     left: 152px;
-    top: 78px;
-}
-.custom .trigger-button.right{
-    background-position-x: -88px;
-    left: 510px;
-    top: 78px;
 }
 
-/* Bumpers */
-
-.custom .bumper{
-    position: absolute;
-    background: url(https://i.imgur.com/Jk9R5Uc.png);
-    background-size: 170px 61px;
-    background-repeat: no-repeat;
-    width: 170px;
-    height: 61px;
+.custom .trigger {
+    width: 88px;
+    height: 121px;
+    background: url(https://gamepadviewer.com/xbox-assets/trigger.svgz);
     opacity: 0;
 }
-.custom .bumper.pressed{
-    opacity: 1;
+
+.custom .trigger.left {
+    float: left;
+    background-position: 0 0;
 }
-.custom .bumper.left{
+
+.custom .trigger.right {
+    float: right;
+    transform: rotateY(180deg);
+}
+
+.custom .bumper {
+    width: 170px;
+    height: 61px;
+    background: url(https://i.imgur.com/Jk9R5Uc.png);
+    opacity: 0;
+}
+
+.custom .bumpers {
+    position: absolute;
+    width: 536px;
+    height: 61px;
     left: 107px;
     top: 129px;
 }
-.custom .bumper.right{
-    left: 473px;
-    top: 129px;
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
+
+.custom .bumper.pressed {
+    opacity: 1;
 }
 
-/* Back / Start */
+.custom .bumper.left {
+    float: left;
+}
 
-.custom .back, .custom .start{
+.custom .bumper.right {
+    float: right;
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.custom .arrows {
     position: absolute;
+    width: 141px;
+    height: 33px;
+    top: 264px;
+    left: 306px;
+}
+
+.custom .back, .custom .start {
     background: url(https://i.imgur.com/HhliUTU.png);
-    background-size: 66px 33px;
-    background-repeat: no-repeat;
+    position: absolute;
     width: 33px;
     height: 33px;
     opacity: 0;
 }
-.custom .back.pressed, .custom .start.pressed{
+
+.custom .back.pressed {
     opacity: 1;
-}
-.custom .back{
-    background-position: 0 0;
-    left: 267px;
-    top: 173px;
-}
-.custom .start{
-    background-position: -33px 0px;
-    left: 440px;
-    top: 173px;
+    top: -91px;
+    left: -39px;
 }
 
-/* A B X Y */
+.custom .start.pressed {
+    opacity: 1;
+    top: -91px;
+    left: 134px;
+}
 
-.custom .button{
+.custom .back {
+    float: left;
+}
+
+.custom .start {
+    background-position: 33px 0px;
+    float: right;
+}
+
+.custom .quadrant {
+    display: none;
+}
+
+.custom .abxy {
+    position: absolute;
+    width: 153px;
+    height: 156px;
+    top: 192px;
+    left: 488px;
+}
+
+.custom .button {
     position: absolute;
     background: url(https://i.imgur.com/WaZySrf.png);
-    background-size: 192px 96px;
-    background-repeat: no-repeat;
     width: 48px;
     height: 48px;
 }
-.custom .button.pressed{
+
+.custom .a.pressed {
     background-position-y: -48px;
+    opacity: 1;
+    top: 108px;
+    left: 55px;
 }
-.custom .a{
+
+.custom .b.pressed {
+    background-position-y: -48px;
+    opacity: 1;
+    top: 58px;
+    right: 0px;
+}
+
+.custom .x.pressed {
+    background-position-y: -48px;
+    opacity: 1;
+    top: 58px;
+    left: 4px;
+}
+
+.custom .y.pressed {
+    background-position-y: -48px;
+    opacity: 1;
+    top: 7px;
+    left: 54px;
+}
+.custom .a {
     background-position: 0 0;
-    left: 543px;
-    top: 300px;
+    top: 114px;
+    left: 55px;
 }
-.custom .b{
+
+.custom .b {
     background-position: -49px 0;
-    left: 592px;
-    top: 256px;
+    top: 64px;
+    right: -1px;
 }
-.custom .x{
+
+.custom .x {
     background-position: -98px 0;
-    left: 492px;
-    top: 256px;
+    top: 64px;
+    left: 4px;
 }
-.custom .y{
+
+.custom .y {
     background-position: 48px 0;
-    left: 543px;
-    top: 204px;
+    left: 55px;
+    top: 12px;
 }
 
-/* DPad */
-
-.custom .face{
+.custom .sticks {
     position: absolute;
-    background: url(https://shmove.github.io/gamepadviewer-procon/images/default/dpad.svg);
-    background-size: 160px 80px;
-    background-repeat: no-repeat;
-    width: 40px;
-    height: 40px;
+    width: 371px;
+    height: 196px;
+    top: 239px;
+    left: 144px;
+}
+
+.custom .stick {
+    position: absolute;
+    background: url(https://gamepadviewer.com/xbox-assets/stick.svgz);
+    background-position: -85px 0;
+    height: 83px;
+    width: 83px;
+}
+
+.custom .stick.pressed {
+    background-position: 0 0;
+}
+
+.custom .stick.left {
+    top: 107px;
+    left: 101px;
+}
+
+.custom .stick.right {
+    top: 107px;
+    left: 274px;
+}
+
+.custom .dpad {
+    position: absolute;
+    width: 110px;
+    height: 111px;
+    top: 226px;
+    left: 129px;
+}
+
+.custom .face {
+    background: url(https://gamepadviewer.com/xbox-assets/dpad.svgz);
+    position: absolute;
     opacity: 0;
 }
-.custom .face.pressed{
+
+.custom .face.pressed {
     opacity: 1;
 }
-.custom .face.up{
-    background-position-x: 0px;
-    left: 167px;
-    top: 226px;
-}
-.custom .face.down{
-    background-position-x: -40px;
-    left: 167px;
-    top: 297px;
-}
-.custom .face.left{
-    background-position-x: -80px;
-    left: 129px;
-    top: 264px;
-}
-.custom .face.right{
-    background-position-x: -120px;
-    left: 205px;
-    top: 264px;
+
+.custom .face.up {
+    background-position: 34px 0;
+    left: 38px;
+    top: 0px;
+    width: 34px;
+    height: 56px;
 }
 
-/* Sticks */
+.custom .face.down {
+    left: 38px;
+    bottom: 0;
+    width: 34px;
+    height: 56px;
+}
 
-.custom .stick{
-    position: absolute;
-    background: url(https://shmove.github.io/gamepadviewer-procon/images/default/stick.svg);
-    background-size: 166px 83px;
-    background-repeat: no-repeat;
-    background-position: -83px 0;
-    width: 83px;
-    height: 83px;
+.custom .face.left {
+    background-position: 0 -93px;
+    width: 55px;
+    height: 35px;
+    top: 38px;
+    left: 0;
 }
-.custom .stick.pressed{
-    background-position: 0 0;
+
+.custom .face.right {
+    background-position: 0 -57px;
+    width: 55px;
+    height: 35px;
+    top: 38px;
+    right: 0;
 }
-.custom .stick.left{
-    left: 245px;
-    top: 346px;
+
+.custom.half {
+    margin-top: -315px;
 }
-.custom .stick.right{
-    left: 418px;
-    top: 346px;
-}
-/*END Thrustmaster / Xbox One Controller Styling*/
