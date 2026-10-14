@@ -1,26 +1,34 @@
 
-/* Pizzabeats Thrustmaster skin for GPV custom CSS.
-   Original 750 x 630 canvas and original inner geometry.
-   Only your four i.imgur.com PNGs and the original GPV Xbox assets.
-   Crucially: let GPV position/center .controller. No 50%/translate overrides.
-*/
+/* =====================================================
+   PIZZABEATS THRUSTMASTER CONTROLLER — V10
+   Original controller: 750 x 630 px
+   Only original Xbox assets and your Imgur images
+   ===================================================== */
 
 .controller.custom {
     width: 750px;
     height: 630px;
     margin: 0 !important;
+
     background-image: url("https://i.imgur.com/yghy9Zb.png");
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 750px 630px;
+
+    /* Final alignment adjustments */
+    --menu-press-x: -2px;
+    --menu-press-y: -2px;
+
+    --dpad-press-x: -2px;
+    --dpad-press-y: -2px;
 }
 
-/* Unlike the original stylesheet, don't hide controls in editor preview. */
-.custom .quadrant { display: none; }
+.custom .quadrant {
+    display: none;
+}
 
-/* TRIGGERS — original 446 x 121 region, 88 x 121 trigger art.
-   GPV 2 may render two sets. Keep the original .trigger sprites only;
-   suppress the extra .trigger-button duplicates. */
+/* ===================== TRIGGERS ===================== */
+
 .custom .triggers {
     position: absolute;
     left: 152px;
@@ -28,19 +36,34 @@
     width: 446px;
     height: 121px;
 }
+
 .custom .trigger {
     width: 88px;
     height: 121px;
     background: url("https://gamepadviewer.com/xbox-assets/trigger.svg") no-repeat;
     opacity: 0;
 }
-.custom .trigger.left { float: left; background-position: 0 0; }
-.custom .trigger.right { float: right; transform: rotateY(180deg); }
-.custom .trigger.pressed { opacity: 1; }
-/* Hide duplicate trigger-button overlay, NOT original Xbox triggers. */
-.custom .trigger-button { display: none !important; }
 
-/* BUMPERS — original container and your Imgur art. */
+.custom .trigger.left {
+    float: left;
+    background-position: 0 0;
+}
+
+.custom .trigger.right {
+    float: right;
+    transform: rotateY(180deg);
+}
+
+.custom .trigger.pressed {
+    opacity: 1;
+}
+
+.custom .trigger-button {
+    display: none !important;
+}
+
+/* ===================== BUMPERS ===================== */
+
 .custom .bumpers {
     position: absolute;
     left: 107px;
@@ -48,18 +71,29 @@
     width: 536px;
     height: 61px;
 }
+
 .custom .bumper {
     width: 170px;
     height: 61px;
     background: url("https://i.imgur.com/Jk9R5Uc.png") no-repeat;
     opacity: 0;
 }
-.custom .bumper.left { float: left; }
-.custom .bumper.right { float: right; transform: rotateY(180deg); }
-.custom .bumper.pressed { opacity: 1; }
 
-/* BACK / START — same absolute original positions; only opacity changes on press.
-   This prevents the Settings/Menu overlay from jumping on press. */
+.custom .bumper.left {
+    float: left;
+}
+
+.custom .bumper.right {
+    float: right;
+    transform: rotateY(180deg);
+}
+
+.custom .bumper.pressed {
+    opacity: 1;
+}
+
+/* ===================== BACK / START ===================== */
+
 .custom .arrows {
     position: absolute;
     left: 306px;
@@ -67,6 +101,7 @@
     width: 141px;
     height: 33px;
 }
+
 .custom .back,
 .custom .start {
     position: absolute;
@@ -75,13 +110,31 @@
     background: url("https://i.imgur.com/HhliUTU.png") no-repeat;
     opacity: 0;
 }
-.custom .back { left: -39px; top: -91px; background-position: 0 0; }
-.custom .start { left: 134px; top: -91px; background-position: -33px 0; }
-.custom .back.pressed,
-.custom .start.pressed { opacity: 1; }
 
-/* ABXY — original 153 x 156 region and 48 x 48 art.
-   Keep pressed art on the exact same pixel coordinates as idle art. */
+.custom .back {
+    left: -39px;
+    top: -91px;
+    background-position: 0 0;
+}
+
+.custom .start {
+    left: 134px;
+    top: -91px;
+    background-position: -33px 0;
+}
+
+.custom .back.pressed,
+.custom .start.pressed {
+    opacity: 1;
+}
+
+/* Move only the pressed Start/Menu graphic */
+.custom .start.pressed {
+    translate: var(--menu-press-x) var(--menu-press-y);
+}
+
+/* ===================== ABXY ===================== */
+
 .custom .abxy {
     position: absolute;
     left: 488px;
@@ -89,28 +142,66 @@
     width: 153px;
     height: 156px;
 }
+
 .custom .button {
     position: absolute;
     width: 48px;
     height: 48px;
     background: url("https://i.imgur.com/WaZySrf.png") no-repeat;
 }
-.custom .a { background-position: 0 0; left: 55px; top: 114px; }
-.custom .b { background-position: -49px 0; right: -1px; top: 64px; }
-.custom .x { background-position: -98px 0; left: 4px; top: 64px; }
-/* Y sprite is the fourth 48px tile; +48px would show no tile. */
-.custom .y { background-position: -147px 0; left: 55px; top: 12px; }
+
+.custom .a {
+    background-position: 0 0;
+    left: 55px;
+    top: 114px;
+}
+
+.custom .b {
+    background-position: -49px 0;
+    right: -1px;
+    top: 64px;
+}
+
+.custom .x {
+    background-position: -98px 0;
+    left: 4px;
+    top: 64px;
+}
+
+.custom .y {
+    background-position: -147px 0;
+    left: 55px;
+    top: 12px;
+}
+
 .custom .button.pressed {
     background-position-y: -48px;
     opacity: 1;
     margin-top: 0 !important;
 }
-.custom .a.pressed { left: 55px; top: 114px; }
-.custom .b.pressed { right: -1px; top: 64px; }
-.custom .x.pressed { left: 4px; top: 64px; }
-.custom .y.pressed { left: 55px; top: 12px; }
 
-/* STICKS — original Xbox stick.svg, original 371 x 196 region. */
+.custom .a.pressed {
+    left: 55px;
+    top: 114px;
+}
+
+.custom .b.pressed {
+    right: -1px;
+    top: 64px;
+}
+
+.custom .x.pressed {
+    left: 4px;
+    top: 64px;
+}
+
+.custom .y.pressed {
+    left: 55px;
+    top: 12px;
+}
+
+/* ===================== JOYSTICKS ===================== */
+
 .custom .sticks {
     position: absolute;
     left: 144px;
@@ -118,21 +209,32 @@
     width: 371px;
     height: 196px;
 }
+
 .custom .stick {
     position: absolute;
     width: 83px;
     height: 83px;
+
     background: url("https://gamepadviewer.com/xbox-assets/stick.svg") no-repeat;
     background-position: -85px 0;
 }
-.custom .stick.pressed { background-position: 0 0; }
-.custom .stick.left { left: 101px; top: 107px; }
-.custom .stick.right { left: 274px; top: 107px; }
 
-/* D-PAD — your EXPLICIT requested original Gamepad Viewer dpad.svg URL.
-   All original directional coordinates remain. The old positive 34px
-   offset made the UP sprite disappear; use the same original down sprite
-   rotated 180 degrees for UP instead. No substitute artwork. */
+.custom .stick.pressed {
+    background-position: 0 0;
+}
+
+.custom .stick.left {
+    left: 101px;
+    top: 107px;
+}
+
+.custom .stick.right {
+    left: 274px;
+    top: 107px;
+}
+
+/* ===================== D-PAD ===================== */
+
 .custom .dpad {
     position: absolute;
     left: 129px;
@@ -140,12 +242,23 @@
     width: 110px;
     height: 111px;
 }
+
 .custom .face {
     position: absolute;
+
+    /* Your explicitly requested original Xbox asset */
     background: url("https://gamepadviewer.com/xbox-assets/dpad.svg") no-repeat;
+
     opacity: 0;
 }
-.custom .face.pressed { opacity: 1; }
+
+.custom .face.pressed {
+    opacity: 1;
+
+    /* Two-pixel alignment correction for all directions */
+    translate: var(--dpad-press-x) var(--dpad-press-y);
+}
+
 .custom .face.up {
     left: 38px;
     top: 0;
@@ -155,12 +268,14 @@
     transform: rotate(180deg);
     transform-origin: center;
 }
+
 .custom .face.down {
     left: 38px;
     bottom: 0;
     width: 34px;
     height: 56px;
 }
+
 .custom .face.left {
     left: 0;
     top: 38px;
@@ -168,6 +283,7 @@
     height: 35px;
     background-position: 0 -93px;
 }
+
 .custom .face.right {
     right: 0;
     top: 38px;
